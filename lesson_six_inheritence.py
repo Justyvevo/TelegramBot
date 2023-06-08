@@ -1,5 +1,6 @@
 from typing import Iterable
 class Ingredients:
+     country = "Russia"
 
      def __init__(self, weight: float, callorage: int) -> None:
           self._weight = weight
@@ -12,14 +13,12 @@ class Ingredients:
           return self._callorage
      def prepare(self):
           pass
-я
+
 
 class Bread(Ingredients):
      def prepare(self):
           print("Bread serverd")
           pass
-
-
 
 
 class Tomato(Ingredients):
@@ -29,14 +28,21 @@ class Tomato(Ingredients):
           self._callorage *= 1.1
 
 
-
-
 class Potato(Ingredients):
      def prepare(self):
           print("Potato fried")
           self._weight += 10
           self._callorage 
+
+
+class Berries(Ingredients):
+     def __init__(self, count: int, weight: float, callorage: int) -> None:
+          super().__init__(weight, callorage)
+          self._count = count
+     
+
 potato, tomato, bread = Potato(0.3, 500), Tomato(0.4, 200), Bread(0.1, 10)
+
 
 def make_dinner(ingredients: Iterable[Ingredients]):
      callorage = 0
@@ -44,5 +50,6 @@ def make_dinner(ingredients: Iterable[Ingredients]):
           ingredient.prepare()
           callorage += ingredient.get_callorage()
      print(f"Dinner was made, total {callorage}")
+
 
 make_dinner((potato, tomato, bread))

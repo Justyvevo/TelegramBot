@@ -42,7 +42,7 @@ a = Rectangle(1,2)
 print(a.area())
 print(a.perimeter())
 b = Scquare(3)
-print(b.quare())
+print(b.square())
 print(b.perimeter())
 
 
