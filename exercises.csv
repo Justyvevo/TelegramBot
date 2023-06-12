@@ -1,0 +1,10 @@
+Age,BMI,Difficulty,Exercise
+Under 30,Normal,Easy,Push-ups
+Under 30,Overweight,Medium,Squats
+Under 30,Overweight,Hard,Burpees
+30-50,Normal,Easy,Jumping jacks
+30-50,Overweight,Medium,Lunges
+30-50,Underweight,Hard,Plank
+Over 50,Normal,Easy,Step-ups
+Over 50,Obese,Medium,Leg lifts
+Over 50,Overweight,Hard,Mountain climbers
