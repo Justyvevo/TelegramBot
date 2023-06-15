@@ -1,6 +1,37 @@
-from time import sleep
-process_name = input("Say my name")
+code_to_smile = {
+        "Clear": "Ясно ☀️",
+        "Clouds": "Облачно 🌥️",
+        "Rain": "Дождь 🌧️",
+        "Light rain": "Лёгкий дождь 🌦️",
+        "Thunderstorm": "Гроза 🌩️",
+        "Snow": "Снег 🌨️",
+        "Mist": "Туман 🌫️",
+        "Sunny": "Солнечно ☀️",
+        "Partly cloudy": "Переменная облачность 🌤️",
+        "Overcast": "Пасмурно ☁️"
+    }
 
-while True:
-    print(f'{process_name}: I am alive!')
-    sleep(1)
+(f"Местное время:{localtm}\n"
+              f"Погода в городе: {city}\nТемпература: {temperature}C°\n"
+              f"Влажность: {humidityy}%\nДавление: {pressure} мм.рт.ст\nВетер: {windspdtrue} м/с\n"
+              f"Восход солнца: {sunrisee}\nЗакат солнца: {sunsett}\nВероятность осадков: {rainchance}\n"
+              f"Хорошего дня!"
+              )
+
+
+temperature = data['current']['temp_c']
+        weather_description = data['current']['condition']['text']
+        temperaturefeel = data['current']['feelslike_c']
+        windspdfalse = data['current']['wind_kph']
+        winddir =data['current']['wind_dir']
+        windspdtrue = windspdfalse * 5/18
+        localtm = data['location']['localtime']
+        humidityy =data['current']['humidity']
+        pressure =data['current']['pressure_mb']
+        sunrisee =data['Astro']['sunrise']
+        sunrisee =data['astro']['sunset']
+        rainchance =data['day']['daily_chance_of_rain']
+        pprint(data)
+
+
+https://api.weatherapi.com/v1/forecast.json?key=a5e802de1e5c464188b114228231106&q={Ekaterinburg}&lang=ru

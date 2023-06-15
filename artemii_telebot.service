@@ -1,0 +1,14 @@
+[Unit]
+Description=Telegram Bot
+After=network.target
+
+[Service]
+User=artemii
+Group=artemii
+
+WorkingDirectory=/home/artemii/TelegramBot/
+Environment="PYTHONPATH=/home/artemii/TelegramBot/"
+ExecStart=/home/artemii/TelegramBot/.venv/bin/python /home/artemii/TelegramBot/Weather3.0.py
+
+[Install]
+WantedBy=multi-user.target

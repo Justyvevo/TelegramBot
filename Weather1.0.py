@@ -1,5 +1,6 @@
 from env import TOKEN
 from enw import API_KEY
+from ent import IAM
 import requests
 import time
 import os
@@ -11,7 +12,7 @@ from aiogram.dispatcher.filters import Text
 import random
 import logging
 from aiogram.types import Message
-
+from pprint import pprint
 # Загружаем переменные окружения
 load_dotenv()
 
@@ -24,6 +25,7 @@ CACHE_TIME = 300
 
 # Словарь для кэширования данных о погоде
 weather_cache = {}
+
 
 # Обработчик команды /start
 @dp.message_handler(commands=['start', 'help'], state='*')
@@ -38,10 +40,12 @@ async def _(message: types.Message, state: FSMContext):
      city_name = message.text
 
     # Формирование URL API для API погоды
-     api_url = f'https://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city_name}'
+     api_url = f'https://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city_name}&lang=ru'
+     api_url = f'https://api.weatherapi.com/v1/forecast.json?key={API_KEY}&q={city_name}&lang=ru'
 
     # Отправка запроса к API погоды
      response = requests.get(api_url)
+        
 
     # Проверка успешности запроса
      if response.status_code == 200:
@@ -51,17 +55,25 @@ async def _(message: types.Message, state: FSMContext):
         # Получение температуры и описания погоды из ответа
         temperature = data['current']['temp_c']
         weather_description = data['current']['condition']['text']
+        temperaturefeel = data['current']['feelslike_c']
+        windspdfalse = data['current']['wind_kph']
+        winddir =data['current']['wind_dir']
+        windspdtrue = windspdfalse * 5/18
+        localtm = data['location']['localtime']
+        humidityy =data['current']['humidity']
+        pressure =data['current']['pressure_mb']
+        pprint(data)
 
         # Определение соответствующей рекомендации по одежде на основе температуры
         if temperature < 10:
-            clothing_recommendation = 'Сейчас очень холодно. Вы должны надеть теплую куртку, перчатки и шапку.'
+            clothing_recommendation = 'Сейчас очень холодно, поэтому Вы должны надеть теплую куртку, перчатки и шапку.'
         elif temperature < 20:
-            clothing_recommendation = 'Сейчас прохладно. Вы можете надеть легкую куртку или свитер.'
+            clothing_recommendation = 'Сейчас прохладно, поэтому Вы можете надеть легкую куртку или свитер.'
         else:
-            clothing_recommendation = 'Сейчас тепло. Вы можете надеть футболку и шорты.'
+            clothing_recommendation = 'Сейчас тепло, поэтому Вы можете надеть футболку и шорты.'
 
         # Отправка сообщения пользователю с температурой, описанием погоды и рекомендацией по одежде
-        await message.reply(f'Температура в городе {city_name} составляет {temperature}°C, а погода {weather_description}. {clothing_recommendation}')
+        await message.reply(f'Температура в городе {city_name} составляет {temperature}°C. {weather_description}. {clothing_recommendation}')
      else:
         # Отправка сообщения об ошибке пользователю, если запрос был неудачным
         await message.reply('Извините, я не смог получить информацию о погоде для этого города. Пожалуйста, попробуйте еще раз позже.')
