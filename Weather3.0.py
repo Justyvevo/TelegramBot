@@ -3,7 +3,7 @@ from env import TOKEN
 from enw import API_KEY
 import time
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
@@ -16,7 +16,7 @@ from schema import Root
 import requests
 import asyncio
 # Загружаем переменные окружения
-load_dotenv()
+#load_dotenv()
 
 # Initialize bot and dispatcher
 bot = Bot(token=TOKEN)
