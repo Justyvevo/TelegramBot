@@ -1,7 +1,7 @@
 from env import TOKEN
 from enw import API_KEY
 from ent import IAM
-from schema import Root
+from my_schema import Root
 import requests
 import time
 import os

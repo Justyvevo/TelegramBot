@@ -13,7 +13,7 @@ import logging
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 import schedule
 from pprint import pprint
-from schema import Root
+from my_schema import Root
 import requests
 import asyncio
 # Загружаем переменные окружения
