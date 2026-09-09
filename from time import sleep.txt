@@ -1,3 +1,5 @@
+import os
+
 code_to_smile = {
         "Clear": "Ясно ☀️",
         "Clouds": "Облачно 🌥️",
@@ -31,7 +33,8 @@ temperature = data['current']['temp_c']
         sunrisee =data['Astro']['sunrise']
         sunrisee =data['astro']['sunset']
         rainchance =data['day']['daily_chance_of_rain']
-        pprint(data)
+        # Avoid logging provider responses.
 
 
-https://api.weatherapi.com/v1/forecast.json?key=a5e802de1e5c464188b114228231106&q={Ekaterinburg}&lang=ru
+api_url = "https://api.weatherapi.com/v1/forecast.json"
+api_params = {"key": os.environ["WEATHER_API_KEY"], "q": city, "lang": "ru"}

@@ -7,8 +7,7 @@ asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) ##
 
 
 import os
-for file in os.listdir('cats'):
-    os.remove('cats/'+file)
+os.makedirs('cats', exist_ok=True)
 
 def time_measure(func):
 
@@ -21,15 +20,19 @@ def time_measure(func):
      return wrapper
 
 async def download_cat(session: aiohttp.ClientSession, img_url: str, i: int):
+    format = img_url[-3:]
+    path = f'cats/cat{i+1}.{format}'
+    if os.path.exists(path):
+        return
     response = await session.get(img_url)
     img_bytes = await response.read()
+    try:
+        with open(path, "xb") as file:
+            file.write(img_bytes)
+    except FileExistsError:
+        return  # Preserve files created while the download was in progress.
+    print(f"cat{i+1}.{format}")
 
-    format = img_url[-3:]
-
-    file = open(f'cats/cat{i+1}.{format}', "wb")
-    file.write(img_bytes)
-    file.close()
-    print(f"cat{i+1}.jpg")
 
 
 async def request():

@@ -17,9 +17,9 @@ class Human:
 
      @staticmethod
      def create_new_name() -> str:
-          return choice(("Doctor", "Balls", "Hurt"))
+          return choice(("Alex", "Sam", "Taylor"))
 
-me = Human(name="Balls", status="hurt.")
+me = Human(name="Alex", status="Student: ")
 
 print(me.create_new_name())
 
