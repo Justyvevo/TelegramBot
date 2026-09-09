@@ -118,7 +118,7 @@ This 2026 portfolio refactor is based on [`Weather3.0.py` in Justyvevo/TelegramB
 - Replaced untracked `env.py` / `enw.py` dependencies with a documented `.env` contract.
 - Migrated the curated version from aiogram 2 to aiogram 3 and separated responsibilities for testing.
 
-The original scripts and unrelated learning exercises remain untouched in the parent repository.
+The root-level scripts are historical learning examples, not the supported entry point. A separate 2026 cleanup removed unrelated meme handlers, clarified two filenames, moved legacy API configuration to environment variables and made the learning downloader preserve existing files. Legacy runtime behaviour has not been fully validated. Previously exposed credentials still require owner rotation; this cleanup does not erase Git history.
 
 ## Verification
 
