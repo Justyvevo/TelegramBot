@@ -169,12 +169,3 @@ async def _(message: types.Message, state: FSMContext):
 # Запускаем бота
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
-
-    @dp.message_handler(Text(equals='Что такое dn?'))
-async def enable_notifications(message: types.Message, state: FSMContext):
-    await message.reply("Deez nuts in your mouth!")
-    await bot.send_video(message.chat.id, 'https://media.tenor.com/_8YhYtl4gWAAAAAC/deez-nuts.gif', None, 'Text')
-
-@dp.message_handler(Text(equals='Устрой дождь из лягушек'))
-async def enable_notifications(message: types.Message, state: FSMContext):
-   await bot.send_video(message.chat.id, 'https://i.gifer.com/MI2d.gif', None, 'Text')
