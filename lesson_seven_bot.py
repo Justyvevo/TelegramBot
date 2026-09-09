@@ -20,7 +20,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
     """
     This handler will be called when user sends `/start` or `/help` command
     """
-    await message.reply("Hey\nI'm BeetleJuice - the strongest creature alive\nWanna train with me and become strong like bull?")
+    await message.reply("Hello! I am a training demo bot. Please enter your name.")
     await state.set_state("q1")
 
 @dp.message_handler(state = "q1")
@@ -40,7 +40,7 @@ async def process(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state = '*')
 async def echo(message: Message):
-    await message.answer(message.text + " balls")
+    await message.answer(message.text)
 
 
 if __name__ == '__main__':

@@ -33,35 +33,12 @@ CACHE_TIME = 300
 # словарь для кэширования данных о погоде
 weather_cache = {}
 
-# шутки
-@dp.message_handler(Text(contains='dn', ignore_case=True), state='*')
-async def deeznuts(message: types.Message, state: FSMContext):
-    await message.reply("Deez nuts in your mouth!")
-    await bot.send_video(message.chat.id, 'https://media.tenor.com/_8YhYtl4gWAAAAAC/deez-nuts.gif', None, 'Text')
-
-@dp.message_handler(Text(contains='из лягушек', ignore_case=True), state='*')
-async def frograin(message: types.Message, state: FSMContext):
-   await message.reply("Пожайлуста!")
-   await bot.send_video(message.chat.id, 'https://media.tenor.com/E4yqJ7esFIkAAAAC/frog-lore.gif', None, 'Text')
-
-@dp.message_handler(Text(contains='kys', ignore_case=True), state='*')
-async def kys(message: types.Message, state: FSMContext):
-   await message.reply("Keep Yourself Safe!")
-   await bot.send_video(message.chat.id, 'https://i.imgflip.com/68cpgw.gif', None, 'Text')
-
-@dp.message_handler(Text(contains='ligma', ignore_case=True), state='*')
-async def kys(message: types.Message, state: FSMContext):
-   await message.reply("Ligma")
-   await bot.send_video(message.chat.id, 'https://media.tenor.com/EXRWnWwXi4wAAAAM/wannaplayleague-league.gif', None, 'Text')
-
-
 # перв
 @dp.message_handler(commands=['start', 'help'], state='*')
 async def send_welcome(message: types.Message, state: FSMContext):
-    await message.reply("Привет! Я Weather Report. Я могу устроить дождь из лягушек, а также сообщить тебе погоду в любом городе. Просто напиши мне название города.",
+    await message.reply("Привет! Я Weather Report. Я могу сообщить тебе погоду в любом городе. Просто напиши мне название города.",
                         reply_markup=ReplyKeyboardRemove())
     await state.set_state("show_weather_for_city")
-    await bot.send_video(message.chat.id, 'https://static.jojowiki.com/images/5/54/latest/20211202080729/Weather_Report_plays_a_Piano.gif', None, 'Text')
 
     
 
@@ -75,7 +52,7 @@ async def enable_notifications(message: types.Message, state: FSMContext):
 
     if not n_enabled:
         await state.update_data(n_enabled=True)
-        task = asyncio.create_task(repeat_weather(state=state, timeout=20))
+        task = asyncio.create_task(repeat_weather(state=state, timeout=4 * 60 * 60))
 
     disable_kb = ReplyKeyboardMarkup()
     disable_kb.add(get_notifications_bt(city, False))
@@ -112,7 +89,7 @@ async def _(message: types.Message, state: FSMContext):
 
 
 # кнопочка запомнить
-@dp.message_handler(lambda message: all(certain_part_of_text not in message.text.lower() for certain_part_of_text in ('dn', 'kys', 'ligma', 'из лягушек')),  state="show_weather_for_city")
+@dp.message_handler(content_types=types.ContentType.TEXT, state="show_weather_for_city")
 async def _(message: types.Message, state: FSMContext):
     previous_city = message.text 
     weather = get_weather(city=previous_city)

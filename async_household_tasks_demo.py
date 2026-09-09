@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import asyncio
 import time
 
@@ -29,5 +31,3 @@ asyncio.run(cooking())
 time.sleep(1)
 asyncio.run(tea())
 
-#Включает многие функции на старых версиях
-from __future__ import annotations
